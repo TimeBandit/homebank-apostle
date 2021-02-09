@@ -1,0 +1,25 @@
+{
+  "name": "homebank-apostle",
+  "version": "1.0.0",
+  "description": "Converts exported transaction statements to Homebank format for import.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimeBandit/homebank-apostle.git"
+  },
+  "keywords": [
+    "homebank",
+    "banking",
+    "csv",
+    "transactions"
+  ],
+  "author": "Imran Nazir (imran.nazir@yahoo.co.uk)",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TimeBandit/homebank-apostle/issues"
+  },
+  "homepage": "https://github.com/TimeBandit/homebank-apostle#readme"
+}
