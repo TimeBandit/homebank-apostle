@@ -2,10 +2,19 @@
   "name": "homebank-apostle",
   "version": "1.0.0",
   "description": "Converts exported transaction statements to Homebank format for import.",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
+  "main": "./lib/index/js",
+  "bin": {
+    "hba": "./lib/index.js"
   },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc -p .",
+    "local": "sudo npm i -g && hba",
+    "create": "npm run build && npm run test",
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
+  },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TimeBandit/homebank-apostle.git"
@@ -21,5 +30,12 @@
   "bugs": {
     "url": "https://github.com/TimeBandit/homebank-apostle/issues"
   },
-  "homepage": "https://github.com/TimeBandit/homebank-apostle#readme"
+  "homepage": "https://github.com/TimeBandit/homebank-apostle#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.25",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.4"
+  }
 }
