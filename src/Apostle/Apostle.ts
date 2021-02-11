@@ -2,32 +2,32 @@
  * Apostle Class
  * A mediator pattern
  */
+import FileManager from "../FileManager/FileManager";
+import Translator from "../Translator/Translater";
+import UI from "../Ui/UI";
 
-interface UI {
-  init(): void;
-}
-interface FileManager {
-  readLine(): string;
-  writeLine(): string;
-}
-
-interface Parser {
-  parse(): any;
+export interface Handler {
+  name: string;
+  handle: () => any;
 }
 
 class Apostle {
   private ui: UI;
   private filemanager: FileManager;
-  private parser: Parser;
-  private handlers: ((data: any) => void)[] = [];
+  private translator: Translator;
+  private handlers: Handler[] = [];
 
-  constructor(config: { ui: UI; fileManager: FileManager; parser: Parser }) {
+  constructor(config: {
+    ui: UI;
+    fileManager: FileManager;
+    parser: Translator;
+  }) {
     this.ui = config.ui;
     this.filemanager = config.fileManager;
-    this.parser = config.parser;
+    this.translator = config.parser;
   }
 
-  addHandler(handler: { name: string; cb: () => any }) {}
+  addHandler(handler: Handler) {}
 
   request(config: {
     action: string;
