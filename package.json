@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc -p .",
     "local": "sudo npm i -g && hba",
     "create": "npm run build && npm run test",
