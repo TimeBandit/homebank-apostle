@@ -11,7 +11,7 @@ export interface Handler {
   handle: () => any;
 }
 
-class Apostle {
+export class Apostle {
   private ui: UI;
   private filemanager: FileManager;
   private translator: Translator;
@@ -20,14 +20,19 @@ class Apostle {
   constructor(config: {
     ui: UI;
     fileManager: FileManager;
-    parser: Translator;
+    translator: Translator;
   }) {
     this.ui = config.ui;
     this.filemanager = config.fileManager;
-    this.translator = config.parser;
+    this.translator = config.translator;
   }
 
-  addHandler(handler: Handler) {}
+  addHandler(handler: Handler) {
+    this.handlers.push(handler);
+  }
+  getHandlers() {
+    return this.handlers;
+  }
 
   request(config: {
     action: string;
@@ -36,4 +41,8 @@ class Apostle {
   }) {}
 }
 
-export default Apostle;
+export default new Apostle({
+  ui: new UI(),
+  fileManager: new FileManager(),
+  translator: new Translator(),
+});
