@@ -7,8 +7,8 @@ import Translator from "../Translator/Translater";
 import UI from "../Ui/UI";
 
 export interface Handler {
-  name: string;
-  handle: () => any;
+  action: string;
+  handler: (data?: { [key: string]: any }) => any;
 }
 
 export class Apostle {
@@ -34,11 +34,19 @@ export class Apostle {
     return this.handlers;
   }
 
-  request(config: {
+  request(payload: {
     action: string;
-    data: { [key: string]: string };
-    cb: (data: { [key: string]: string }) => void;
-  }) {}
+    data?: { [key: string]: any };
+    cb?: (data: { [key: string]: string }) => void;
+  }) {
+    const actionObject = this.handlers.find(
+      (handler) => handler.action === payload.action
+    );
+    if (actionObject) {
+      console.log(payload.data);
+      actionObject.handler(payload.data || undefined);
+    }
+  }
 }
 
 export default new Apostle({
