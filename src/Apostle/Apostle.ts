@@ -43,7 +43,6 @@ export class Apostle {
       (handler) => handler.action === payload.action
     );
     if (actionObject) {
-      console.log(payload.data);
       actionObject.handler(payload.data || undefined);
     }
   }
