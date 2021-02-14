@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg)
+
 # Homebank Apostle
 
 ![Homebank Apostle ](./header.png "Homebank Apostle")
