@@ -6,8 +6,16 @@
 
 > Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert them readable by Homebank.
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+- [Homebank Apostle](#homebank-apostle)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Support](#support)
+  - [Contributing](#contributing)
 
-## How To Use
+## Features
+
+## Installation
+
+## Support
 
 ## Contributing
