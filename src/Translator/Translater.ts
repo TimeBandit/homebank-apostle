@@ -1,4 +1,6 @@
-class Translator {
+import { BaseComponent } from "../types";
+
+class Translator extends BaseComponent {
   parse() {}
 }
 
