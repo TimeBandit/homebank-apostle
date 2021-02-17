@@ -38,8 +38,11 @@ export class Mediator implements BaseMediator {
     } = {}
   ) {
     this.view = config.view || null;
+    this.view?.setMediator(this);
     this.filemanager = config.fileManager || null;
+    this.filemanager?.setMediator(this);
     this.translator = config.translator || null;
+    this.translator?.setMediator(this);
   }
 
   addHandler(handler: Handler) {

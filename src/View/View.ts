@@ -4,7 +4,10 @@ class View extends BaseComponent {
   selectFile(files: string[]) {
     if (!this.mediator) throw new Error("View: No mediator set");
 
-    this.mediator.request({ action: "view:set-selection" });
+    this.mediator.request({
+      action: "view:selection",
+      data: { selection: "testFile2" },
+    });
   }
 }
 

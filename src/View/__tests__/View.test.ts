@@ -1,10 +1,9 @@
-import Mediator from "../Mediator/Mediator";
-import View from "./View";
-
-jest.mock("../Mediator/Mediator.ts");
+import Mediator from "../../Mediator/Mediator";
+import View from "../View";
 
 const view = new View();
 const mediator = new Mediator({ view });
+const mockRequest = jest.spyOn(mediator, "request");
 
 describe("view", () => {
   it("should request a chosen file to be read", () => {
@@ -12,9 +11,8 @@ describe("view", () => {
     const testFile2 = "testFile2";
     const fileNames = [testFile1, testFile2];
 
-    const mockMediator = Mediator;
     view.selectFile(fileNames);
-    // assert the the request method o the mediator is called correctly
+
     expect(mockRequest).toHaveBeenCalledWith({
       action: "view:selection",
       data: { selection: testFile2 },
