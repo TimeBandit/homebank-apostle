@@ -14,11 +14,11 @@ describe("view", () => {
     view.selectFile(fileNames);
 
     expect(mockRequest).toHaveBeenCalledWith({
-      action: "view:selection",
+      action: "view:select-file",
       data: { selection: testFile2 },
     });
   });
-  it.skip("should request an error to be skipped", () => {});
-  it.skip("should request the CLI to exit", () => {});
+  it.skip("should emit a skip action when user triggered", () => {});
+  it.skip("should emit an exit action when user triggered", () => {});
   it.skip("should request a translation file to use", () => {});
 });
