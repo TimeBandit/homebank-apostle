@@ -12,7 +12,7 @@ describe("view", () => {
     const testFile2 = "testFile2";
     const fileNames = [testFile1, testFile2];
 
-    view.setChoices(fileNames);
+    view.setQuestion("Select a file", fileNames);
     view.promptUser();
 
     // select the file
@@ -24,7 +24,7 @@ describe("view", () => {
     view.prompt?.on("submit", async () => {
       await view.submit();
       expect(mockRequest).toHaveBeenCalledWith({
-        action: "view:select-file",
+        action: "view:select",
         data: { selection: testFile2 },
       });
       done();
@@ -32,7 +32,49 @@ describe("view", () => {
 
     // assert
   });
-  it.skip("should emit a skip action when user triggered", () => {});
-  it.skip("should emit an exit action when user triggered", () => {});
-  it.skip("should request a translation file to use", () => {});
+  it("should emit a skip action when user triggered", (done) => {
+    const skipAction = "skip";
+    const exitAction = "exit";
+    const actions = [skipAction, exitAction];
+
+    view.setQuestion("Error, what do you want to do", actions);
+    view.promptUser();
+
+    // select the file
+    view.prompt?.on("run", () => {
+      stdin.send(`\u000d`); // enter
+    });
+
+    view.prompt?.on("submit", async () => {
+      await view.submit();
+      expect(mockRequest).toHaveBeenCalledWith({
+        action: "view:select",
+        data: { selection: "skip" },
+      });
+      done();
+    });
+  });
+  it("should emit an exit action when user triggered", (done) => {
+    const skipAction = "skip";
+    const exitAction = "exit";
+    const actions = [skipAction, exitAction];
+
+    view.setQuestion("Error, what do you want to do", actions);
+    view.promptUser();
+
+    // select the file
+    view.prompt?.on("run", () => {
+      stdin.send(`\u001b[B`); // down
+      stdin.send(`\u000d`); // enter
+    });
+
+    view.prompt?.on("submit", async () => {
+      await view.submit();
+      expect(mockRequest).toHaveBeenCalledWith({
+        action: "view:select",
+        data: { selection: "exit" },
+      });
+      done();
+    });
+  });
 });

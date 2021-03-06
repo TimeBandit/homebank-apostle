@@ -5,19 +5,19 @@ import { BaseComponent } from "../types";
 
 class View extends BaseComponent {
   mediator: Mediator | null = null;
-  fileNames: string[] = [];
+  choices: string[] = [];
   prompt: Prompt | null = null;
   runningPrompt?: Promise<void>;
   selection: any | null = null;
 
-  setChoices(list: string[]) {
+  setQuestion(message: string, choices: string[]) {
     if (!this.mediator) throw new Error("View: No mediator set");
-    if (list.length === 0) throw new Error("No files found");
+    if (choices.length === 0) throw new Error("No files found");
 
-    this.fileNames = list;
+    this.choices = choices;
     this.prompt = new Select({
-      message: "Select a csv file",
-      choices: list,
+      message,
+      choices,
     });
   }
 
@@ -30,12 +30,12 @@ class View extends BaseComponent {
       .catch(console.error);
   }
 
-  async submit(selection?: string) {
+  async submit() {
     await this.runningPrompt;
     if (!this.selection) throw new Error("view: no selection made");
 
     this.mediator?.request({
-      action: "view:select-file",
+      action: `view:select`,
       data: { selection: this.selection },
     });
   }
