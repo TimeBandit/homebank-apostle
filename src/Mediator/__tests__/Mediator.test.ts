@@ -1,35 +1,37 @@
-import apostle from "./Apostle";
+import Mediator from "../Mediator";
 
 const mockFirstActionHandler = jest.fn();
 const mockSecondActionHandler = jest.fn();
 
-describe("apostle", () => {
+const mediator = new Mediator({});
+
+describe("mediator", () => {
   it("should have no handlers", () => {
-    expect(apostle.getHandlers()).toHaveLength(0);
+    expect(mediator.getHandlers()).toHaveLength(0);
   });
   it("should add a handler", () => {
     const handler = {
       action: "test-handler",
-      handler: mockFirstActionHandler,
+      handle: mockFirstActionHandler,
     };
-    apostle.addHandler(handler);
+    mediator.addHandler(handler);
 
-    expect(apostle.getHandlers()[0]).toMatchObject(handler);
+    expect(mediator.getHandlers()[0]).toMatchObject(handler);
   });
   it("should call the correct handler when requested", () => {
     const handler = {
-      action: "fist-action",
-      handler: mockFirstActionHandler,
+      action: "test:action",
+      handle: mockFirstActionHandler,
     };
-    apostle.addHandler(handler);
+    mediator.addHandler(handler);
 
     const handler2 = {
       action: "second-handler",
-      handler: mockSecondActionHandler,
+      handle: mockSecondActionHandler,
     };
-    apostle.addHandler(handler2);
+    mediator.addHandler(handler2);
 
-    apostle.request({ action: "fist-action", data: { count: 3 } });
+    mediator.request({ action: "test:action", data: { count: 3 } });
 
     expect(mockFirstActionHandler).toHaveBeenCalled();
     expect(mockFirstActionHandler).toHaveBeenCalledTimes(1);

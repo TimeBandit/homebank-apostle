@@ -1,4 +1,6 @@
-class FileManager {
+import { BaseComponent } from "../types";
+
+class FileManager extends BaseComponent {
   readLine() {
     return "";
   }
