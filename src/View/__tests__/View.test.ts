@@ -15,7 +15,7 @@ describe("view", () => {
     view.setChoices(fileNames);
     view.promptUser();
 
-    // select the file to read
+    // select the file
     view.prompt?.on("run", () => {
       stdin.send(`\u001b[B`); // down
       stdin.send(`\u000d`); // enter
@@ -23,7 +23,6 @@ describe("view", () => {
 
     view.prompt?.on("submit", async () => {
       await view.submit();
-
       expect(mockRequest).toHaveBeenCalledWith({
         action: "view:select-file",
         data: { selection: testFile2 },

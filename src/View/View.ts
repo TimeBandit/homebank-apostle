@@ -13,6 +13,7 @@ class View extends BaseComponent {
   setChoices(list: string[]) {
     if (!this.mediator) throw new Error("View: No mediator set");
     if (list.length === 0) throw new Error("No files found");
+
     this.fileNames = list;
     this.prompt = new Select({
       message: "Select a csv file",
@@ -31,7 +32,6 @@ class View extends BaseComponent {
 
   async submit(selection?: string) {
     await this.runningPrompt;
-
     if (!this.selection) throw new Error("view: no selection made");
 
     this.mediator?.request({
