@@ -7,8 +7,10 @@ class View extends BaseComponent {
   mediator: Mediator | null = null;
   fileNames: string[] = [];
   prompt: Prompt | null = null;
+  runningPrompt?: Promise<void>;
+  selection: any | null = null;
 
-  promptUser(list: string[]) {
+  setChoices(list: string[]) {
     if (!this.mediator) throw new Error("View: No mediator set");
     if (list.length === 0) throw new Error("No files found");
     this.fileNames = list;
@@ -16,25 +18,26 @@ class View extends BaseComponent {
       message: "Select a csv file",
       choices: list,
     });
-    // this.prompt?.addListener('submit', and)
   }
 
-  submit(selection: string) {
-    this.mediator?.request({
-      action: "view:select-file",
-      data: { selection: selection },
-    });
-  }
-  selectChoice() {
-    this.prompt
+  promptUser() {
+    this.runningPrompt = this.prompt
       ?.run()
       .then((selection) => {
-        this.mediator?.request({
-          action: "view:select-file",
-          data: { selection: selection },
-        });
+        this.selection = selection;
       })
       .catch(console.error);
+  }
+
+  async submit(selection?: string) {
+    await this.runningPrompt;
+
+    if (!this.selection) throw new Error("view: no selection made");
+
+    this.mediator?.request({
+      action: "view:select-file",
+      data: { selection: this.selection },
+    });
   }
 }
 
