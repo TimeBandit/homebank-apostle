@@ -29,8 +29,6 @@ describe("view", () => {
       });
       done();
     });
-
-    // assert
   });
   it("should emit a skip action when user triggered", (done) => {
     const skipAction = "skip";
