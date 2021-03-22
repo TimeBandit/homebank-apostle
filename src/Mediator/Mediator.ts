@@ -12,9 +12,7 @@ export interface Handler {
 
 export interface Payload {
   action: string;
-  data?: {
-    [key: string]: any;
-  };
+  data?: Record<string, any>;
   cb?: (data: { [key: string]: string }) => void;
 }
 

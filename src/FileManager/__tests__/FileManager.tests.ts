@@ -1,18 +1,23 @@
-jest.mock("fs", () => {
-  const originalFsModule = jest.requireActual("fs");
+import { PassThrough } from "stream";
+import Mediator from "../../Mediator/Mediator";
+import FileManager from "../FileManager";
 
-  // * mock specific method in a module
-  return {
-    ...originalFsModule,
-    readFileSync: jest.fn(),
-  };
-});
+const fileManager = new FileManager();
+const mediator = new Mediator({ fileManager });
+const mockRequest = jest.spyOn(mediator, "request");
+const mockedStream = new PassThrough();
 
-import fs from "fs";
-// mock a file opening
 describe("describe", () => {
-  it("should open a csv file", () => {
-    console.log(fs);
+  it("should open a file", () => {
+    fileManager.loadFile(mockedStream);
+    mockedStream.emit("data", "hello world");
+
+    expect(mockRequest).toHaveBeenCalledWith({
+      action: "file-manager:loadFile",
+      data: { open: true },
+    });
+    mockedStream.end();
   });
-  // it("should return the first line of the file", () => {});
+  it("should read a line", () => {});
+  it("should tell if there is a new line", () => {});
 });
