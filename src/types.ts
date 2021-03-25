@@ -1,4 +1,4 @@
-import Mediator from "./Mediator/Mediator";
+import Mediator from "./mediator/mediator";
 
 class BaseComponent {
   protected mediator: Mediator | null;

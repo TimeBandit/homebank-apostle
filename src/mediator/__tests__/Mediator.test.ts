@@ -1,4 +1,4 @@
-import Mediator from "../Mediator";
+import Mediator from "../mediator";
 
 const mockFirstActionHandler = jest.fn();
 const mockSecondActionHandler = jest.fn();
