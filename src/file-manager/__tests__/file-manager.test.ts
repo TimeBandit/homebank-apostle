@@ -32,5 +32,15 @@ describe("describe", () => {
       data: { line: "line2" },
     });
   });
-  it("should tell if there is a new line", () => {});
+  it("should tell if there is a new line", async() => {
+    await fileManager.loadFile(twoLinesFilePath);
+    await fileManager.readLine();
+    
+    await fileManager.hasNextLine()
+    expect(mockRequest).toHaveBeenCalledWith({
+      action: "file-manager:hasNextLine",
+      data: { hasNextLine: true },
+    });
+
+  });
 });

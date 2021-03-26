@@ -34,7 +34,6 @@ class FileManager extends BaseComponent {
         }
 
         resolve(line || "");
-
         this.mediator?.request({
           action: "file-manager:readLine",
           data: { line },
@@ -43,16 +42,28 @@ class FileManager extends BaseComponent {
     });
   }
 
-  hasNextLine(): boolean {
-    if (this.reader?.hasNextLine()) {
-      return true;
-    }
-    this.reader?.close((err) => {
-      if (err) {
-        throw err;
+  hasNextLine() {
+    return new Promise<boolean | Error>((resolve, reject) => {
+      if (this.reader?.hasNextLine()) {
+        resolve(true)
+        this.mediator?.request({
+          action: "file-manager:hasNextLine",
+          data: { hasNextLine: true }
+        })
       }
-    });
-    return false;
+
+      this.reader?.close((err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(false)
+          this.mediator?.request({
+            action: "file-manager:hasNextLine",
+            data: { hasNextLine: true }
+          })
+        }
+      })
+    })
   }
 }
 
