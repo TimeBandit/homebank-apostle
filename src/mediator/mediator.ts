@@ -1,9 +1,9 @@
 /**
  * Mediator
  */
-import FileManager from "../FileManager/FileManager";
-import Translator from "../Translator/Translater";
-import View from "../View/View";
+import FileManager from "../file-manager/file-manager";
+import Translator from "../translater";
+import View from "../view/view";
 
 export interface Handler {
   action: string;
@@ -12,9 +12,7 @@ export interface Handler {
 
 export interface Payload {
   action: string;
-  data?: {
-    [key: string]: any;
-  };
+  data?: Record<string, any>;
   cb?: (data: { [key: string]: string }) => void;
 }
 

@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Prompt, Select } from "enquirer";
-import Mediator from "../Mediator/Mediator";
+import Mediator from "../mediator/mediator";
 import { BaseComponent } from "../types";
 
 class View extends BaseComponent {

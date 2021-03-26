@@ -1,5 +1,5 @@
-import Mediator from "../../Mediator/Mediator";
-import View from "../View";
+import Mediator from "../../mediator/mediator";
+import View from "../view";
 
 const view = new View();
 const mediator = new Mediator({ view });
@@ -29,8 +29,6 @@ describe("view", () => {
       });
       done();
     });
-
-    // assert
   });
   it("should emit a skip action when user triggered", (done) => {
     const skipAction = "skip";
