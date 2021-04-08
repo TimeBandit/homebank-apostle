@@ -2,7 +2,7 @@
  * Mediator
  */
 import FileManager from "../file-manager/file-manager";
-import Translator from "../translater";
+import Translator from "../parser/parser";
 import View from "../view/view";
 
 export interface Handler {

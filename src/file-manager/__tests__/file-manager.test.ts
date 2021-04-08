@@ -8,7 +8,7 @@ const mockRequest = jest.spyOn(mediator, "request");
 const emptyFilePath = __dirname + "/data/empty-file.csv";
 const twoLinesFilePath = __dirname + "/data/two-lines.csv";
 
-describe("describe", () => {
+describe("file-manager", () => {
   it("should open a file", async () => {
     await fileManager.loadFile(emptyFilePath);
 
@@ -32,15 +32,14 @@ describe("describe", () => {
       data: { line: "line2" },
     });
   });
-  it("should tell if there is a new line", async() => {
+  it("should tell if there is a new line", async () => {
     await fileManager.loadFile(twoLinesFilePath);
     await fileManager.readLine();
-    
-    await fileManager.hasNextLine()
+
+    await fileManager.hasNextLine();
     expect(mockRequest).toHaveBeenCalledWith({
       action: "file-manager:hasNextLine",
       data: { hasNextLine: true },
     });
-
   });
 });
