@@ -51,39 +51,40 @@ class SmileBankStrategy implements BaseStrategy {
     return homeBankTransactionType;
   }
 
-  toJSON(lineOfCsv: string): SmileTransaction {
+  private toJSON(lineOfCsv: string): SmileTransaction {
     return papa.parse<SmileTransaction>(SMILE_BANK_HEADERS + "\n" + lineOfCsv, {
       header: true,
     }).data[0]; // par
   }
 
-  toCSV(data: HomebankTransaction): string {
+  private toCSV(data: HomebankTransaction): string {
     return papa.unparse([data], { header: false, delimiter: ";" });
+  }
+
+  private getAmount(transaction: SmileTransaction): number {
+    const amount =
+      parseFloat(transaction["Money In"]) ||
+      -1 * parseFloat(transaction["Money Out"]);
+
+    if (isNaN(amount)) {
+      throw new Error(
+        `error transforming ${JSON.stringify(transaction, null, 2)}`
+      );
+    }
+
+    return amount;
   }
 
   parse(lineOfCsv: string): string {
     const smileTransaction = this.toJSON(lineOfCsv);
-    const homeBankTransactionType = this.getHomebankTransactionType(
-      smileTransaction.Type
-    );
-
-    const amount =
-      parseFloat(smileTransaction["Money In"]) ||
-      -1 * parseFloat(smileTransaction["Money Out"]);
-
-    if (isNaN(amount)) {
-      throw new Error(
-        `error transforming ${JSON.stringify(smileTransaction, null, 2)}`
-      );
-    }
 
     const homebankTransaction = {
       date: smileTransaction.Date,
-      payment: homeBankTransactionType,
+      payment: this.getHomebankTransactionType(smileTransaction.Type),
       info: "",
       payee: "",
       memo: smileTransaction.Description,
-      amount,
+      amount: this.getAmount(smileTransaction),
       category: "",
       tags: "",
     };
