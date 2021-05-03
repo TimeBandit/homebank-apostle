@@ -42,4 +42,5 @@ describe("file-manager", () => {
       data: { hasNextLine: true },
     });
   });
+  it("should write a translated tractions to file", () => {});
 });

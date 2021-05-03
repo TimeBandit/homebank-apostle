@@ -3,9 +3,10 @@ import { BaseComponent } from "../types";
 
 class FileManager extends BaseComponent {
   reader: Reader | null = null;
-
+  fileName: string = "";
   loadFile(fileName: any) {
     const that = this;
+    this.fileName = fileName;
     return new Promise<boolean | Error>((resolve, reject) => {
       lineReader.open(fileName, function (err, reader) {
         if (err) {
@@ -45,25 +46,25 @@ class FileManager extends BaseComponent {
   hasNextLine() {
     return new Promise<boolean | Error>((resolve, reject) => {
       if (this.reader?.hasNextLine()) {
-        resolve(true)
+        resolve(true);
         this.mediator?.request({
           action: "file-manager:hasNextLine",
-          data: { hasNextLine: true }
-        })
+          data: { hasNextLine: true },
+        });
       }
 
       this.reader?.close((err) => {
         if (err) {
-          reject(err)
+          reject(err);
         } else {
-          resolve(false)
+          resolve(false);
           this.mediator?.request({
             action: "file-manager:hasNextLine",
-            data: { hasNextLine: true }
-          })
+            data: { hasNextLine: true },
+          });
         }
-      })
-    })
+      });
+    });
   }
 }
 

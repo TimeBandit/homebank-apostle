@@ -46,7 +46,7 @@ class SmileBankStrategy implements BaseStrategy {
         homeBankTransactionType = HomebankPaymentType.Transfer;
         break;
       default:
-        homeBankTransactionType = HomebankPaymentType.None;
+        throw new Error("smile payment type not found");
     }
     return homeBankTransactionType;
   }

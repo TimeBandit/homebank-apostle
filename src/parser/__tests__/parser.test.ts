@@ -26,11 +26,9 @@ const testData = [
     "2018-11-15,TFR 77915682212360,TRANSFER,,150.00,1829.51",
     "2018-11-15;4;;;TFR 77915682212360;-150;;",
   ],
-  [
-    "2018-11-15,TFR 77915682212360,UNKNOWN,,150.00,1829.51",
-    "2018-11-15;0;;;TFR 77915682212360;-150;;",
-  ],
 ];
+
+const badTestData = [["2018-11-15,TFR 77915682212360,UNKNOWN,,150.00,1829.51"]];
 
 const testParser = new Parser();
 testParser.setParser(smilebankStrategy);
@@ -39,6 +37,11 @@ describe("parser", () => {
     const result = testParser.parse(source);
     expect(result).toEqual(parsed);
   });
-
-  it("should throw an error if csv cannot be parsed", () => {});
+  test.each(badTestData)("given %s parser should return an error", (source) => {
+    const error = () => {
+      testParser.parse(source);
+    };
+    expect(error).toThrowError("smile payment type not found");
+  });
+  it("should write a debug log on error", () => {});
 });
