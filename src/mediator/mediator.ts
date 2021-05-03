@@ -1,8 +1,5 @@
-/**
- * Mediator
- */
 import FileManager from "../file-manager/file-manager";
-import Translator from "../translater";
+import Parser from "../parser/parser";
 import View from "../view/view";
 
 export interface Handler {
@@ -25,14 +22,14 @@ export interface BaseMediator {
 export class Mediator implements BaseMediator {
   private view: View | null;
   private filemanager: FileManager | null;
-  private translator: Translator | null;
+  private translator: Parser | null;
   private handlers: Handler[] = [];
 
   constructor(
     config: {
       view?: View;
       fileManager?: FileManager;
-      translator?: Translator;
+      translator?: Parser;
     } = {}
   ) {
     this.view = config.view || null;
