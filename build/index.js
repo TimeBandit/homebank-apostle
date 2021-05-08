@@ -1,3 +1,3 @@
-#!/usr/bin/env node
+#!/usr/bin/env
 "use strict";
 console.log("starting...");
