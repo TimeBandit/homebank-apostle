@@ -1,14 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["es6", "es2015", "dom"],
+    "allowJs": true,
     "declaration": true,
-    "outDir": "lib",
-    "rootDirs": ["src", "."],
-    "strict": true,
-    "types": ["jest", "node"],
     "esModuleInterop": true,
-    "resolveJsonModule": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es6", "es2015", "dom"],
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es5",
+    "types": ["jest", "node"]
+  },
+  "exclude": ["**/*.test.ts", "jest.config.ts", "build"]
 }

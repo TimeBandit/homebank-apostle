@@ -2,18 +2,17 @@
   "name": "homebank-apostle",
   "version": "1.0.0",
   "description": "Converts exported transaction statements to Homebank format for import.",
-  "main": "./lib/index/js",
+  "main": "./build/index/js",
   "bin": {
-    "hba": "./lib/index.js"
+    "homebank-apostle": "./build/index.js"
   },
   "scripts": {
+    "start": "npm run build && node build/index.js",
+    "start:dev": "nodemon",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "tsc -p .",
-    "local": "sudo npm i -g && hba",
-    "create": "npm run build && npm run test",
-    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
+    "build": "rimraf ./build && tsc",
+    "local": "sudo npm i -g && homebank-apostle"
   },
   "repository": {
     "type": "git",
