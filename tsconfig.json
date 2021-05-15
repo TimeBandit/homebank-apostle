@@ -5,10 +5,11 @@
     "lib": ["es6", "es2015", "dom"],
     "declaration": true,
     "outDir": "lib",
-    "rootDirs": ["src", "."],
+    "rootDirs": ["src"],
     "strict": true,
     "types": ["jest", "node"],
     "esModuleInterop": true,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["**/*.test.ts", "./lib/**/*"]
 }
