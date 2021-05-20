@@ -22,22 +22,22 @@ export interface BaseMediator {
 export class Mediator implements BaseMediator {
   private view: View | null;
   private filemanager: FileManager | null;
-  private translator: Parser | null;
+  private parser: Parser | null;
   private handlers: Handler[] = [];
 
   constructor(
     config: {
       view?: View;
       fileManager?: FileManager;
-      translator?: Parser;
+      parser?: Parser;
     } = {}
   ) {
     this.view = config.view || null;
     this.view?.setMediator(this);
     this.filemanager = config.fileManager || null;
     this.filemanager?.setMediator(this);
-    this.translator = config.translator || null;
-    this.translator?.setMediator(this);
+    this.parser = config.parser || null;
+    this.parser?.setMediator(this);
   }
 
   addHandler(handler: Handler) {

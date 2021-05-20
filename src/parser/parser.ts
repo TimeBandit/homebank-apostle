@@ -26,7 +26,7 @@ class Parser extends BaseComponent {
     }
   }
 
-  setParser(strategy: BaseStrategy) {
+  setStrategy(strategy: BaseStrategy) {
     this._parser = strategy;
   }
 }

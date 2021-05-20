@@ -31,7 +31,7 @@ const testData = [
 const badTestData = [["2018-11-15,TFR 77915682212360,UNKNOWN,,150.00,1829.51"]];
 
 const testParser = new Parser();
-testParser.setParser(smilebankStrategy);
+testParser.setStrategy(smilebankStrategy);
 describe("parser", () => {
   test.each(testData)("given %s parser should return %s", (source, parsed) => {
     const result = testParser.parse(source);
