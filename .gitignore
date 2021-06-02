@@ -1,6 +1,8 @@
-# custome
+# custom
 uml.dia
 .vscode/
+lib/
+*.csv
 
 # Logs
 logs

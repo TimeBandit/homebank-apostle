@@ -9,17 +9,17 @@ export interface HomebankTransaction {
   tags: string;
 }
 
+// from 0=none to 10=FI fee (in the same order of the list)
 export enum HomebankPaymentType {
-  None,
-  CreditCard,
-  Cheque,
-  Cash,
-  Transfer,
-  InternalTransfer,
-  DebitCard,
-  StandingOrder,
-  ElectronicPayment,
-  Deposit,
-  FiFee,
-  DirectDebit,
+  None = 0,
+  CreditCard = 1,
+  Cheque = 2,
+  Cash = 3,
+  Transfer = 4,
+  DebitCard = 5,
+  StandingOrder = 6,
+  ElectronicPayment = 7,
+  Deposit = 8,
+  FiFee = 9,
+  DirectDebit = 10,
 }

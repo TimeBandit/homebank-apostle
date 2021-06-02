@@ -14,21 +14,28 @@ describe("file-manager", () => {
 
     expect(mockRequest).toHaveBeenCalledWith({
       action: "file-manager:loadFile",
-      data: { open: true },
+      data: { isOpen: true },
     });
   });
   it("should read a line", async () => {
     await fileManager.loadFile(twoLinesFilePath);
-
+    expect(mockRequest).toHaveBeenCalledWith({
+      action: "file-manager:loadFile",
+      data: {
+        isOpen: true,
+      },
+    });
     await fileManager.readLine();
     expect(mockRequest).toHaveBeenCalledWith({
-      action: "file-manager:readLine",
-      data: { line: "line1" },
+      action: "file-manager:line",
+      data: {
+        line: "line1",
+      },
     });
 
     await fileManager.readLine();
     expect(mockRequest).toHaveBeenCalledWith({
-      action: "file-manager:readLine",
+      action: "file-manager:line",
       data: { line: "line2" },
     });
   });
@@ -36,11 +43,6 @@ describe("file-manager", () => {
     await fileManager.loadFile(twoLinesFilePath);
     await fileManager.readLine();
 
-    await fileManager.hasNextLine();
-    expect(mockRequest).toHaveBeenCalledWith({
-      action: "file-manager:hasNextLine",
-      data: { hasNextLine: true },
-    });
+    await expect(fileManager.hasNextLine()).resolves.toBe(true);
   });
-  it("should write a translated tractions to file", () => {});
 });

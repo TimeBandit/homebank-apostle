@@ -2,17 +2,20 @@
   "name": "homebank-apostle",
   "version": "1.0.0",
   "description": "Converts exported transaction statements to Homebank format for import.",
-  "main": "./build/index/js",
+  "main": "./lib/index/js",
   "bin": {
-    "homebank-apostle": "./build/index.js"
+    "hba": "./lib/index.js"
   },
   "scripts": {
-    "start": "npm run build && node build/index.js",
-    "start:dev": "nodemon",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "rimraf ./build && tsc",
-    "local": "sudo npm i -g && homebank-apostle"
+    "build": "tsc -p .",
+    "local": "sudo npm i -g && hba",
+    "create": "npm run build && npm run test",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'DEBUG=* ts-node' src/index.ts",
+    "start:prod": "nodemon --watch 'src/**/*.ts' --exec 'DEBUG=* ts-node' src/index.ts",
+    "run": "ts-node src/index.ts",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
   },
   "repository": {
     "type": "git",
@@ -50,7 +53,7 @@
     "@types/papaparse": "^5.2.5",
     "enquirer": "^2.3.6",
     "line-reader": "^0.4.0",
-    "logplease": "^1.2.15",
+    "logging": "^3.3.0",
     "mock-fs": "^4.13.0",
     "papaparse": "^5.3.0"
   }
