@@ -13,7 +13,7 @@
     "local": "sudo npm i -g && hba",
     "create": "npm run build && npm run test",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'DEBUG=* ts-node' src/index.ts",
-    "start:prod": "nodemon --watch 'src/**/*.ts' --exec 'DEBUG=* ts-node' src/index.ts",
+    "start:prod": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "run": "ts-node src/index.ts",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
   },

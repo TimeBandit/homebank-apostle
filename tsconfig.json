@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es6", "es2015", "dom"],
@@ -15,5 +14,5 @@
     "target": "es5",
     "types": ["jest", "node"]
   },
-  "exclude": ["**/*.test.ts", "jest.config.ts", "./lib/**/*"]
+  "exclude": ["**/*.test.ts", "jest.config.ts", "lib/**"]
 }
