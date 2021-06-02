@@ -2,9 +2,9 @@
   "name": "homebank-apostle",
   "version": "1.0.0",
   "description": "Converts exported transaction statements to Homebank format for import.",
-  "main": "./lib/index/js",
+  "main": "./build/index/js",
   "bin": {
-    "hba": "./lib/index.js"
+    "homebank-apostle": "./build/index.js"
   },
   "scripts": {
     "test": "jest",
