@@ -2,7 +2,7 @@
 
 ## homebank-apostle
 
-![Homebank Apostle ](./header-small.png "Homebank Apostle")
+![Homebank Apostle ](./banner.png "Homebank Apostle")
 
 > **Homebank Apostle** is tool to help you import files into Homebank.
 > Export your internet banking transactions to CSV format and use
