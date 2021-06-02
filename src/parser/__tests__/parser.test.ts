@@ -49,7 +49,6 @@ describe("parsers", () => {
     test.each(testData)(
       "given %s parser should return %s",
       (source, parsed) => {
-        console.log(source, parsed);
         parser.parse(source);
         expect(mockRequest).toHaveBeenCalledWith({
           action: "parser:result",
