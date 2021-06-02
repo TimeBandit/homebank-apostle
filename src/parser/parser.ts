@@ -1,6 +1,8 @@
-import logger from "../logger/logger";
+import createLogger from "logging";
 import { BaseComponent } from "../types";
 import BaseStrategy from "./strategies/base-strategy";
+
+const logger = createLogger(__filename);
 
 class Parser extends BaseComponent {
   private _parser: BaseStrategy | null = null;
@@ -10,23 +12,20 @@ class Parser extends BaseComponent {
     let result;
     try {
       result = this._parser?.parse(lineOfCsv);
-      logger.info("Parsed: ", lineOfCsv);
       this.mediator?.request({
         action: "parser:result",
         data: { result },
       });
-      return result;
     } catch (error) {
       logger.error("Failed to parse: ", lineOfCsv, error);
-      this.mediator?.request({
-        action: "parser:result",
-        data: { result: error },
-      });
       throw error;
     }
   }
 
-  setStrategy(strategy: BaseStrategy) {
+  get headers() {
+    return this._parser?.headers;
+  }
+  set strategy(strategy: BaseStrategy) {
     this._parser = strategy;
   }
 }

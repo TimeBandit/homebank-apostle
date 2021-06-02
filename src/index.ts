@@ -6,11 +6,13 @@ import Parser from "./parser/parser";
 import smilebankStrategy from "./parser/strategies/smilebank-strategy";
 import View from "./view/view";
 
-console.log("starting...");
+console.log("Lets parse your files...");
 
 const view = new View();
 const fileManager = new FileManager();
 const parser = new Parser();
-parser.setStrategy(smilebankStrategy);
+parser.strategy = smilebankStrategy;
 
 const mediator = new Mediator({ view, fileManager, parser });
+mediator.init();
+fileManager.getCsvFileNames();

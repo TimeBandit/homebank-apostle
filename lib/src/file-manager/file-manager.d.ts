@@ -5,5 +5,6 @@ declare class FileManager extends BaseComponent {
     loadFile(fileName: any): Promise<boolean | Error>;
     readLine(): Promise<string | Error>;
     hasNextLine(): Promise<boolean | Error>;
+    getCsvFileNames(): void;
 }
 export default FileManager;

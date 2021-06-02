@@ -18,19 +18,21 @@ export interface BaseMediator {
     addHandler: (handler: Handler) => void;
     getHandlers: () => Handler[];
     request: (payload: Payload) => void;
+    init: () => void;
 }
 export declare class Mediator implements BaseMediator {
     private view;
     private filemanager;
-    private translator;
+    private parser;
     private handlers;
     constructor(config?: {
         view?: View;
         fileManager?: FileManager;
-        translator?: Parser;
+        parser?: Parser;
     });
     addHandler(handler: Handler): void;
     getHandlers(): Handler[];
     request(payload: Payload): void;
+    init(): void;
 }
 export default Mediator;

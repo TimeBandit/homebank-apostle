@@ -1,7 +1,10 @@
 // @ts-ignore
-import { Prompt, Select } from "enquirer";
+import { Prompt, prompt, PromptOptions } from "enquirer";
 import Mediator from "../mediator/mediator";
 import { BaseComponent } from "../types";
+import { getLogger } from "../utils/utils";
+
+const logger = getLogger(__filename);
 
 class View extends BaseComponent {
   mediator: Mediator | null = null;
@@ -9,27 +12,39 @@ class View extends BaseComponent {
   prompt: Prompt | null = null;
   runningPrompt?: Promise<void>;
   selection: any | null = null;
+  prompts: PromptOptions[] = [
+    {
+      type: "confirm",
+      name: "parseOnly",
+      message: "Parse to file (hit enter for NO)?",
+    },
+  ];
 
   setQuestion(message: string, choices: string[]) {
     if (!this.mediator) throw new Error("View: No mediator set");
     if (choices.length === 0) throw new Error("No files found");
 
-    this.choices = choices;
-    this.prompt = new Select({
+    this.prompts.push({
+      type: "select",
       message,
+      name: "fileName",
       choices,
     });
   }
 
-  promptUser() {
-    this.runningPrompt = this.prompt
-      ?.run()
-      .then((selection) => {
-        this.selection = selection;
-      })
-      .catch(console.error);
+  async promptUser() {
+    try {
+      const response = await prompt(this.prompts);
+      this.mediator?.request({
+        action: "view:promptUser",
+        data: { ...response },
+      });
+    } catch (error) {
+      logger.error(error);
+    }
   }
 
+  // TODO consider removing this
   async submit() {
     await this.runningPrompt;
     if (!this.selection) throw new Error("view: no selection made");

@@ -19,10 +19,13 @@ enum SmilePaymentType {
   StandingOrder = "BP/SO",
   Credit = "CREDIT",
   DirectDebit = "DD",
+  Other = "OTHER",
+  Unknown = "UNKNOWN",
 }
 
 class SmileBankStrategy implements BaseStrategy {
-  getHomebankTransactionType(
+  headers = SMILE_BANK_HEADERS;
+  mapSourceTypeToHomebankType(
     sourceTransactionType: SmilePaymentType
   ): HomebankPaymentType {
     let homeBankTransactionType: HomebankPaymentType;
@@ -45,14 +48,18 @@ class SmileBankStrategy implements BaseStrategy {
       case SmilePaymentType.Transfer:
         homeBankTransactionType = HomebankPaymentType.Transfer;
         break;
+      case SmilePaymentType.Other:
+      case SmilePaymentType.Unknown:
+        homeBankTransactionType = HomebankPaymentType.None;
+        break;
       default:
-        throw new Error("smile payment type not found");
+        throw new Error(`no payment type for ${sourceTransactionType}`);
     }
     return homeBankTransactionType;
   }
 
   private toJSON(lineOfCsv: string): SmileTransaction {
-    return papa.parse<SmileTransaction>(SMILE_BANK_HEADERS + "\n" + lineOfCsv, {
+    return papa.parse<SmileTransaction>(this.headers + "\n" + lineOfCsv, {
       header: true,
     }).data[0]; // par
   }
@@ -71,7 +78,6 @@ class SmileBankStrategy implements BaseStrategy {
         `error transforming ${JSON.stringify(transaction, null, 2)}`
       );
     }
-
     return amount;
   }
 
@@ -80,7 +86,7 @@ class SmileBankStrategy implements BaseStrategy {
 
     const homebankTransaction = {
       date: smileTransaction.Date,
-      payment: this.getHomebankTransactionType(smileTransaction.Type),
+      payment: this.mapSourceTypeToHomebankType(smileTransaction.Type),
       info: "",
       payee: "",
       memo: smileTransaction.Description,
