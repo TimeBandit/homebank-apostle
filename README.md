@@ -1,24 +1,20 @@
 ![Node.js CI](https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg)
 
-## homebank-apostle
+![alt text](ha-banner.png "Logo Title Text 1")
 
-![Homebank Apostle ](./banner.png "Homebank Apostle")
+<h4>A tool for importing your csv files into Homebank</h4>
 
-> **Homebank Apostle** is tool to help you import files into Homebank.
-> Export your internet banking transactions to CSV format and use
-> this too convert make them readable by Homebank.
+<p>
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#contributing">Contributing</a> •
+</p>
 
-- [homebank-apostle](#homebank-apostle)
-- [Features](#features)
-- [Installation](#installation)
-- [Support](#support)
-- [Contributing](#contributing)
-
-## Features
+Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert make them readable by Homebank.
 
 ## Installation
 
-## Support
+## Usage
 
 ## Contributing
 
