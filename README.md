@@ -1,6 +1,6 @@
 ![Node.js CI](https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg)
 
-![alt text](ha-banner.png "Logo Title Text 1")
+![alt text](banner.png "Homebank Apostle")
 
 <h4>A tool for importing your csv files into Homebank</h4>
 
