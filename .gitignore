@@ -3,6 +3,7 @@ uml.dia
 .vscode/
 lib/
 *.csv
+parsed/
 
 # Logs
 logs

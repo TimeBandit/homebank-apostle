@@ -16,7 +16,7 @@ class View extends BaseComponent {
     {
       type: "confirm",
       name: "parseOnly",
-      message: "Parse to file (hit enter for NO)?",
+      message: "Write to file? (default: NO)",
     },
   ];
 
@@ -42,17 +42,6 @@ class View extends BaseComponent {
     } catch (error) {
       logger.error(error);
     }
-  }
-
-  // TODO consider removing this
-  async submit() {
-    await this.runningPrompt;
-    if (!this.selection) throw new Error("view: no selection made");
-
-    this.mediator?.request({
-      action: `view:select`,
-      data: { selection: this.selection },
-    });
   }
 }
 
