@@ -8,68 +8,72 @@ const logger = getLogger(__filename);
 
 class FileManager extends BaseComponent {
   reader: Reader | null = null;
-  fileName: string = "";
+  fileStream: fs.WriteStream | null = null;
+  parsedFileName: string = "";
+  parsedFileDestination: string = `${process.cwd()}/parsed`;
 
-  loadFile(fileName: any) {
-    logger.debug("fileName :", fileName);
-    const that = this;
-    this.fileName = fileName;
-    return new Promise<boolean | Error>((resolve, reject) => {
+  loadFile(fileName: string, writeToFile: boolean = false) {
+    return new Promise<void>((resolve, reject) => {
+      logger.debug("loading :", fileName);
+      const that = this;
       lineReader.open(fileName, function (err, reader) {
+        logger.info("opening ", fileName);
         if (err) {
-          resolve(err);
+          reject();
         }
 
         that.reader = reader;
-        resolve(that.reader.isOpen());
+
+        if (writeToFile) {
+          if (fs.existsSync(that.parsedFileDestination)) {
+            logger.info("Destination directory exists!");
+          } else {
+            logger.warn("Destination folder not found. Creating...");
+            fs.mkdirSync(that.parsedFileDestination);
+          }
+        }
+
+        that.parsedFileName = `${
+          that.parsedFileDestination
+        }/${Date.now()}-${fileName}-parsed`;
 
         that.mediator?.request({
           action: "file-manager:loadFile",
           data: { isOpen: that.reader.isOpen() },
         });
+        resolve();
       });
     });
   }
 
-  readLine() {
-    return new Promise<string | Error>((resolve, reject) => {
-      if (!this.reader) {
-        reject(new Error("No reader initialized"));
-      }
+  readLine(skipRetrieval: boolean = false) {
+    return new Promise<void>((resolve, reject) => {
       this.reader?.nextLine((err, line) => {
         if (err) {
-          reject(err);
+          reject();
         }
-        resolve(line || "");
+
         this.mediator?.request({
-          action: "file-manager:line",
-          data: { line },
+          action: "file-manager:readLine",
+          data: { line: skipRetrieval ? null : line },
         });
+        resolve();
       });
     });
   }
 
   hasNextLine() {
-    return new Promise<boolean | Error>((resolve, reject) => {
-      if (this.reader?.hasNextLine()) {
-        resolve(true);
-        // ? DEAD CODE
-        // this.mediator?.request({
-        //   action: "file-manager:hasNextLine",
-        //   data: { hasNextLine: true },
-        // });
-      } else {
-        this.reader?.close((err) => {
-          if (err) {
-            reject(err);
-          } else {
-            logger.info("no more lines to read, closing file");
-            resolve(false);
-          }
+    return new Promise<boolean>((resolve, reject) => {
+      try {
+        const hasNextLine = this.reader?.hasNextLine() || false;
+        this.mediator?.request({
+          action: "file-manager:hasNextLine",
+          data: { hasNextLine: this.reader?.hasNextLine() },
         });
+        resolve(hasNextLine);
+      } catch (error) {
+        reject(error);
       }
-
-      // ? DEAD CODE
     });
   }
 
@@ -89,18 +93,19 @@ class FileManager extends BaseComponent {
     });
   }
 
-  // ! might be dead code
-  // async readFile(fileToRead: string) {
-  //   try {
-  //     await this.loadFile(fileToRead);
-  //     do {
-  //       const line = await this.readLine();
-  //       logger.info(line);
-  //     } while (await this.hasNextLine());
-  //   } catch (error) {
-  //     logger.error(error);
-  //   }
-  // }
+  write(line: string) {
+    logger.info("writing =>", line);
+    this.fileStream = fs.createWriteStream(this.parsedFileName, {
+      flags: "a",
+    });
+    this.fileStream?.write(line + "\n");
+  }
+
+  close() {
+    logger.info("closing file");
+    this.fileStream?.close();
+    process.exit();
+  }
 }
 
 export default FileManager;

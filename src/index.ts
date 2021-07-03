@@ -4,9 +4,11 @@ import FileManager from "./file-manager/file-manager";
 import Mediator from "./mediator/mediator";
 import Parser from "./parser/parser";
 import smilebankStrategy from "./parser/strategies/smilebank-strategy";
+import { getLogger } from "./utils/utils";
 import View from "./view/view";
 
-console.log("Lets parse your files...");
+const logger = getLogger(__filename);
+logger.info("Lets parse your files...");
 
 const view = new View();
 const fileManager = new FileManager();

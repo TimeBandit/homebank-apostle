@@ -13,6 +13,7 @@ export interface Handler {
 export interface Payload {
   action: string;
   data: Record<string, any>;
+  callback?: Function;
 }
 
 export interface BaseMediator {
@@ -27,7 +28,7 @@ export class Mediator implements BaseMediator {
   private filemanager: FileManager | null;
   private parser: Parser | null;
   private handlers: Handler[] = [];
-  private parseOnly: boolean = true;
+  private writeToFile: boolean = false;
 
   constructor(
     config: {
@@ -75,51 +76,70 @@ export class Mediator implements BaseMediator {
           this.view?.promptUser();
         } else {
           logger.error("no csv files found");
+          process.exit(1);
         }
       },
     });
     this.addHandler({
       action: "view:promptUser",
-      handle: async (payload) => {
-        const { fileName, parseOnly } = payload;
-        this.parseOnly = parseOnly;
+      handle: (payload) => {
+        const { fileName, parseOnly: writeToFile } = payload;
+        logger.info("write to file?", writeToFile);
+        this.writeToFile = writeToFile;
         try {
-          await this.filemanager?.loadFile(fileName);
+          this.filemanager?.loadFile(fileName, this.writeToFile);
         } catch (error) {
           logger.error(error);
+          process.exit(1);
         }
       },
     });
     this.addHandler({
       action: "file-manager:loadFile",
-      handle: async (payload) => {
+      handle: (payload) => {
+        logger.info("asdfasd");
         const { isOpen } = payload;
         if (!isOpen) {
           logger.error("could not open file");
-          return;
+          process.exit(1);
         }
-        try {
-          // read off the first line
+
+        const newHeaders = this.parser?.headers;
+        if (!newHeaders) throw new Error("no headers to write");
+        if (!this.writeToFile) {
+          this.filemanager?.write(newHeaders);
+        }
+
+        // read off the first line (headers)
+        this.filemanager?.readLine(true);
+        this.filemanager?.hasNextLine();
+      },
+    });
+    this.addHandler({
+      action: "file-manager:hasNextLine",
+      handle: (payload) => {
+        const { hasNextLine } = payload;
+        if (hasNextLine) {
           this.filemanager?.readLine();
-          const newHeaders = this.parser?.headers;
-          // todo: write the new header to file
-          do {
-            await this.filemanager?.readLine();
-          } while (await this.filemanager?.hasNextLine());
-        } catch (error) {
-          logger.error(error);
+        } else {
+          this.filemanager?.close();
         }
       },
     });
     this.addHandler({
-      action: "file-manager:line",
+      action: "file-manager:readLine",
       handle: (payload) => {
         const { line } = payload;
         if (typeof line === "string") {
-          // logger.warn(line);
-          this.parser?.parse(line);
+          try {
+            this.parser?.parse(line);
+          } catch (error) {
+            logger.error(error);
+            process.exit(1);
+          }
         } else {
-          throw new Error("no line to parse");
+          logger.error("no line to parse");
+          this.filemanager?.close();
         }
       },
     });
@@ -127,7 +147,11 @@ export class Mediator implements BaseMediator {
       action: "parser:result",
       handle: (payload) => {
         const { result } = payload;
-        logger.debug(result);
+        if (this.writeToFile) {
+          this.filemanager?.write(result);
+        }
+        logger.info(result);
+        this.filemanager?.hasNextLine();
       },
     });
   }
