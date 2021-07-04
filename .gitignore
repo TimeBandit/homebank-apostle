@@ -4,6 +4,7 @@ uml.dia
 lib/
 *.csv
 parsed/
+*.ignore-this
 
 # Logs
 logs

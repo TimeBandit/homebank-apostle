@@ -1,7 +1,8 @@
 import { HomebankPaymentType } from "./types";
 
 interface BaseStrategy {
-  headers: string;
+  sourceHeaders: string;
+  destinationHeaders: string;
   mapSourceTypeToHomebankType(
     sourceTransactionType: string
   ): HomebankPaymentType;
