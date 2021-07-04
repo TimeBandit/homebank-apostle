@@ -22,8 +22,11 @@ class Parser extends BaseComponent {
     }
   }
 
-  get headers() {
-    return this._parser?.headers;
+  get destinationHeaders() {
+    return this._parser?.destinationHeaders;
+  }
+  get sourceHeaders() {
+    return this._parser?.sourceHeaders;
   }
   set strategy(strategy: BaseStrategy) {
     this._parser = strategy;

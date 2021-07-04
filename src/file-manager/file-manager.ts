@@ -17,7 +17,7 @@ class FileManager extends BaseComponent {
       logger.debug("loading :", fileName);
       const that = this;
       lineReader.open(fileName, function (err, reader) {
-        logger.info("opening ", fileName);
+        logger.debug("opening ", fileName);
         if (err) {
           reject();
         }
@@ -26,7 +26,7 @@ class FileManager extends BaseComponent {
 
         if (writeToFile) {
           if (fs.existsSync(that.parsedFileDestination)) {
-            logger.info("Destination directory exists!");
+            logger.debug("Destination directory exists!");
           } else {
             logger.warn("Destination folder not found. Creating...");
             fs.mkdirSync(that.parsedFileDestination);
@@ -65,7 +65,7 @@ class FileManager extends BaseComponent {
   hasNextLine() {
     return new Promise<boolean>((resolve, reject) => {
       try {
-        const hasNextLine = this.reader?.hasNextLine() || false;
+        const hasNextLine = this.reader!.hasNextLine();
         this.mediator?.request({
           action: "file-manager:hasNextLine",
           data: { hasNextLine: this.reader?.hasNextLine() },
@@ -94,11 +94,21 @@ class FileManager extends BaseComponent {
   }
 
   write(line: string) {
-    logger.info("writing =>", line);
-    this.fileStream = fs.createWriteStream(this.parsedFileName, {
-      flags: "a",
+    if (!this.fileStream) {
+      this.fileStream = fs.createWriteStream(this.parsedFileName, {
+        flags: "a",
+      });
+    }
+    return new Promise<void>((resolve, reject) => {
+      this.fileStream?.write(line + "\n", (err) => {
+        if (err) {
+          reject();
+        } else {
+          logger.debug("write: ", line);
+          resolve();
+        }
+      });
     });
-    this.fileStream?.write(line + "\n");
   }
 
   close() {

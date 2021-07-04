@@ -2,14 +2,15 @@ import papa from "papaparse";
 import BaseStrategy from "./base-strategy";
 import { HomebankPaymentType, HomebankTransaction } from "./types";
 
-const SMILE_BANK_HEADERS = "Date,Description,Type,Money In,Money Out,Balance";
-
+const SOURCE_HEADERS = "Date,Description,Type,Money In,Money Out,Balance";
+const DESTINATION_HEADERS = "date;payment;info;payee;memo;amount;category;tags";
 interface SmileTransaction {
   Date: string;
   Description: string;
   Type: SmilePaymentType;
   ["Money In"]: string;
   ["Money Out"]: string;
+  Balance: string;
 }
 
 enum SmilePaymentType {
@@ -24,7 +25,8 @@ enum SmilePaymentType {
 }
 
 class SmileBankStrategy implements BaseStrategy {
-  headers = SMILE_BANK_HEADERS;
+  sourceHeaders = SOURCE_HEADERS;
+  destinationHeaders = DESTINATION_HEADERS;
   mapSourceTypeToHomebankType(
     sourceTransactionType: SmilePaymentType
   ): HomebankPaymentType {
@@ -59,7 +61,7 @@ class SmileBankStrategy implements BaseStrategy {
   }
 
   private toJSON(lineOfCsv: string): SmileTransaction {
-    return papa.parse<SmileTransaction>(this.headers + "\n" + lineOfCsv, {
+    return papa.parse<SmileTransaction>(this.sourceHeaders + "\n" + lineOfCsv, {
       header: true,
     }).data[0]; // par
   }
@@ -84,7 +86,7 @@ class SmileBankStrategy implements BaseStrategy {
   parse(lineOfCsv: string): string {
     const smileTransaction = this.toJSON(lineOfCsv);
 
-    const homebankTransaction = {
+    const homebankTransaction: HomebankTransaction = {
       date: smileTransaction.Date,
       payment: this.mapSourceTypeToHomebankType(smileTransaction.Type),
       info: "",

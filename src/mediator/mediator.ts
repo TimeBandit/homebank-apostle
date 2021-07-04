@@ -84,7 +84,7 @@ export class Mediator implements BaseMediator {
       action: "view:promptUser",
       handle: (payload) => {
         const { fileName, parseOnly: writeToFile } = payload;
-        logger.info("write to file?", writeToFile);
+        logger.info("user want to write to file?", writeToFile);
         this.writeToFile = writeToFile;
         try {
           this.filemanager?.loadFile(fileName, this.writeToFile);
@@ -96,18 +96,18 @@ export class Mediator implements BaseMediator {
     });
     this.addHandler({
       action: "file-manager:loadFile",
-      handle: (payload) => {
-        logger.info("asdfasd");
+      handle: async (payload) => {
         const { isOpen } = payload;
         if (!isOpen) {
           logger.error("could not open file");
           process.exit(1);
         }
 
-        const newHeaders = this.parser?.headers;
-        if (!newHeaders) throw new Error("no headers to write");
-        if (!this.writeToFile) {
-          this.filemanager?.write(newHeaders);
+        const destinationHeaders = this.parser?.destinationHeaders;
+        if (!destinationHeaders) throw new Error("no headers to write");
+        if (this.writeToFile) {
+          logger.debug("writing headers: ", destinationHeaders);
+          await this.filemanager?.write(destinationHeaders); // await for write to complete
         }
 
         // read off the first line (headers)
@@ -130,27 +130,27 @@ export class Mediator implements BaseMediator {
       action: "file-manager:readLine",
       handle: (payload) => {
         const { line } = payload;
-        if (typeof line === "string") {
-          try {
-            this.parser?.parse(line);
-          } catch (error) {
-            logger.error(error);
-            process.exit(1);
-          }
-        } else {
-          logger.error("no line to parse");
-          this.filemanager?.close();
+
+        if (line === null) {
+          return;
+        }
+
+        try {
+          this.parser?.parse(line);
+        } catch (error) {
+          logger.error(error);
+          process.exit(1);
         }
       },
     });
     this.addHandler({
       action: "parser:result",
-      handle: (payload) => {
+      handle: async (payload) => {
         const { result } = payload;
-        if (this.writeToFile) {
-          this.filemanager?.write(result);
-        }
         logger.info(result);
+        if (this.writeToFile) {
+          await this.filemanager?.write(result);
+        }
         this.filemanager?.hasNextLine();
       },
     });
