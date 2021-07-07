@@ -1,8 +1,14 @@
-![alt text](img/banner.png "Homebank Apostle")
+<h1 align="center">
+  <br>
+  <img src="./img/HBLogo.png" width="200">
+  <br>
+  Homebank Apostle
+  <br>
+</h1>
 
-<h4>A tool to parse those transaction exports that aren't Homebank compatibable</h4>
+<h4 align="center">A tool to parse those transaction exports that aren't Homebank compatibable</h4>
 
-<p>
+<p align="center">
   <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
     <img src="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
   </a>
@@ -14,7 +20,7 @@
   </a>
 </p>
 
-<p>
+<p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#installation">Installation</a> •
   <a href="#usage">Usage</a> •
@@ -22,7 +28,9 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](/img/demo.gif)
+<section align="center">
+  <img src="./img/demo.gif">
+</section>
 
 ## Key Features
 
