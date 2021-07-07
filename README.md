@@ -1,6 +1,7 @@
-![alt text](banner.png "Homebank Apostle")
+![alt text](img/banner.png "Homebank Apostle")
 
 <h4>A tool to parse those transaction exports that aren't compatibable format</h4>
+<br>
 
 <p>
   <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
@@ -15,13 +16,16 @@
 </p>
 
 <p>
-  <a href="#key">Installation</a> •
+  <a href="#key-features">Key Features</a> •
   <a href="#installation">Installation</a> •
   <a href="#usage">Usage</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](/img/demo.gif)
+
+## Key Features
 
 Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert make them readable by Homebank.
 
@@ -30,6 +34,10 @@ Homebank Apostle is tool to help you import files into Homebank. Export your int
 ## Usage
 
 ## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 To add support for other bank exports you must first create a strategy for it. This tell the tool how to map payment types from your bank to something Homebanks can understand.
 
@@ -52,3 +60,7 @@ enum HomebankPaymentType {
 ```
 
 Create a stategy for your bank that implement the BaseStrategy interface. This maps the payment types for your bank to Homebank transaction types. It needs a `parse(...)` method that takes a like of CSV from your source file and a `mapSourceTypeToHomebankType(...)` that does the actual mapping of the payment types.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
