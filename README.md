@@ -1,7 +1,6 @@
 ![alt text](img/banner.png "Homebank Apostle")
 
-<h4>A tool to parse those transaction exports that aren't compatibable format</h4>
-<br>
+<h4>A tool to parse those transaction exports that aren't Homebank compatibable</h4>
 
 <p>
   <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
