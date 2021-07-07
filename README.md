@@ -28,9 +28,9 @@
   <a href="#license">License</a>
 </p>
 
-<section align="center">
+<h1 align="center">
   <img src="./img/demo.gif">
-</section>
+</h1>
 
 ## Key Features
 
