@@ -1,14 +1,27 @@
-![Node.js CI](https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg)
-
 ![alt text](banner.png "Homebank Apostle")
 
-<h4>A tool for importing your csv files into Homebank</h4>
+<h4>A tool to parse those transaction exports that aren't compatibable format</h4>
 
 <p>
+  <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
+    <img src="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
+  </a>
+  <a href="https://gitter.im/homebank-apostle/community">
+    <img src="https://badges.gitter.im/homebank-apostle/community.svg">
+  </a>
+  <a href="https://paypal.me/imrannazir?locale.x=en_GB">
+    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
+  </a>
+</p>
+
+<p>
+  <a href="#key">Installation</a> •
   <a href="#installation">Installation</a> •
   <a href="#usage">Usage</a> •
-  <a href="#contributing">Contributing</a> •
+  <a href="#contributing">Contributing</a>
 </p>
+
+![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
 Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert make them readable by Homebank.
 
