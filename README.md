@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">A tool to parse those transaction exports that aren't Homebank compatible</h4>
+<h4 align="center">A tool to help you convert csv exports into a Homebank compatible format</h4>
 
 <p align="center">
   <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
