@@ -12,8 +12,8 @@
   <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
     <img src="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
   </a>
-  <a href="https://gitter.im/homebank-apostle/community">
-    <img src="https://badges.gitter.im/homebank-apostle/community.svg">
+  <a href="https://gitter.im/homebank-apostle/homebank-apostle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+    <img src="https://badges.gitter.im/homebank-apostle/homebank-apostle.svg">
   </a>
   <a href="https://paypal.me/imrannazir?locale.x=en_GB">
     <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
@@ -33,8 +33,6 @@
 </h1>
 
 ## Key Features
-
-[![Join the chat at https://gitter.im/homebank-apostle/homebank-apostle](https://badges.gitter.im/homebank-apostle/homebank-apostle.svg)](https://gitter.im/homebank-apostle/homebank-apostle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert make them readable by Homebank.
 
