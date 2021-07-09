@@ -34,6 +34,8 @@
 
 ## Key Features
 
+[![Join the chat at https://gitter.im/homebank-apostle/homebank-apostle](https://badges.gitter.im/homebank-apostle/homebank-apostle.svg)](https://gitter.im/homebank-apostle/homebank-apostle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert make them readable by Homebank.
 
 ## Installation
