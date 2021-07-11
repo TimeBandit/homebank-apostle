@@ -41,7 +41,7 @@ This tools was created to help me work with my online banking transaction files.
 ```
 # clone the repo and change directory into the cloned folder
 git clone https://github.com/TimeBandit/homebank-apostle.git
-cd
+cd homebank-apostle/
 
 # install the dependencies, build the source code and run the tests
 npm i
