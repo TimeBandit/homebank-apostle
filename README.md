@@ -88,4 +88,4 @@ Create a stategy for your bank that implement the BaseStrategy interface. This m
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[GPL v3](https://choosealicense.com/licenses/gpl-3.0)
