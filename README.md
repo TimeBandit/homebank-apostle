@@ -38,17 +38,22 @@ This tools was created to help me work with my online banking transaction files.
 
 ## Installation
 
+
+Clone the repo and change directory into the cloned folder
+```console
+foo@bar:~$ git clone https://github.com/TimeBandit/homebank-apostle.git
+foo@bar:~$ cd homebank-apostle/
 ```
-# clone the repo and change directory into the cloned folder
-git clone https://github.com/TimeBandit/homebank-apostle.git
-cd homebank-apostle/
 
-# install the dependencies, build the source code and run the tests
-npm i
-npm run create
+Install the dependencies, build the source code and run the tests
+```console
+foo@bar:~$ npm i
+foo@bar:~$ npm run create
+```
 
-# add a global command called 'hba'
-npm run local
+Add a global command called 'hba'
+```console
+foo@bar:~$ npm run local
 ```
 
 ## Usage
@@ -63,7 +68,7 @@ To add support for other bank exports you must first create a strategy for it. T
 
 Below are the payment types that Homebank currently supports. They correspond to the selectables of the Payment dropdown list you see when you edit a transaction in Homebank. The ordering is important
 
-```
+```typescript
 enum HomebankPaymentType {
   None = 0,
   CreditCard = 1,
