@@ -29,7 +29,7 @@
     "transactions"
   ],
   "author": "Imran Nazir (imran.nazir@yahoo.co.uk)",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/TimeBandit/homebank-apostle/issues"
   },
