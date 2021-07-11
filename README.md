@@ -38,6 +38,19 @@ This tools was created to help me work with my online banking transaction files.
 
 ## Installation
 
+```
+# clone the repo and change directory into the cloned folder
+git clone https://github.com/TimeBandit/homebank-apostle.git
+cd
+
+# install the dependencies, build the source code and run the tests
+npm i
+npm run create
+
+# add a global command called 'hba'
+npm run local
+```
+
 ## Usage
 
 ## Contributing
