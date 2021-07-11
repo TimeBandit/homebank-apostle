@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc -p .",
     "create": "npm run build && npm run test",
-    "local": "sudo npm i -g && hba",
+    "local": "sudo npm i -g",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "run:dev:watch": "nodemon --watch 'src/**/*.ts' --exec 'DEBUG=* ts-node' src/index.ts",
     "run:dev": "DEBUG=* ts-node src/index.ts",
