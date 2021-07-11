@@ -34,7 +34,7 @@
 
 ## Key Features
 
-Homebank Apostle is tool to help you import files into Homebank. Export your internet banking transactions to CSV format and use this too convert make them readable by Homebank.
+This tools was created to help me work with my online banking transaction files. The exports were in CSV format and needed parsing into a format that Homebank could import. There are two modes of operation. A `parse only` or a `parse to file` mode. Both modes will halt if there is an error in parsing a paticular line in the CSV file with an error message being displayed in the terminal.
 
 ## Installation
 
