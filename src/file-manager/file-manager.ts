@@ -1,5 +1,6 @@
 import fs from "fs";
 import lineReader from "line-reader";
+import { nanoid } from "nanoid";
 import path from "path";
 import { BaseComponent } from "../types";
 import { getLogger } from "../utils/utils";
@@ -33,9 +34,9 @@ class FileManager extends BaseComponent {
           }
         }
 
-        that.parsedFileName = `${
-          that.parsedFileDestination
-        }/${Date.now()}-${fileName}-parsed`;
+        that.parsedFileName = `${that.parsedFileDestination}/${
+          fileName.split(".csv")[0]
+        }-<${nanoid(3)}>.csv`;
 
         that.mediator?.request({
           action: "file-manager:loadFile",

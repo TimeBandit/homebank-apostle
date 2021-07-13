@@ -6,6 +6,7 @@
   <br>
 </h1>
 
+<h3 align="center">UNDER DEVELOPMENT</h3>
 <h4 align="center">A tool to help you convert csv exports into a Homebank compatible format</h4>
 
 <p align="center">
@@ -38,20 +39,22 @@ This tools was created to help me work with my online banking transaction files.
 
 ## Installation
 
-
 Clone the repo and change directory into the cloned folder
+
 ```console
 foo@bar:~$ git clone https://github.com/TimeBandit/homebank-apostle.git
 foo@bar:~$ cd homebank-apostle/
 ```
 
 Install the dependencies, build the source code and run the tests
+
 ```console
 foo@bar:~$ npm i
 foo@bar:~$ npm run create
 ```
 
 Add a global command called 'hba'
+
 ```console
 foo@bar:~$ npm run local
 ```
