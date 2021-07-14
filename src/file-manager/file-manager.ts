@@ -3,7 +3,7 @@ import lineReader from "line-reader";
 import { nanoid } from "nanoid";
 import path from "path";
 import { BaseComponent } from "../types";
-import { getLogger } from "../utils/utils";
+import { getLogger, status } from "../utils/utils";
 
 const logger = getLogger(__filename);
 
@@ -29,14 +29,14 @@ class FileManager extends BaseComponent {
           if (fs.existsSync(that.parsedFileDestination)) {
             logger.debug("Destination directory exists!");
           } else {
-            logger.warn("Destination folder not found. Creating...");
+            status.warn("Destination folder not found. Creating...");
             fs.mkdirSync(that.parsedFileDestination);
           }
         }
 
-        that.parsedFileName = `${that.parsedFileDestination}/${
+        that.parsedFileName = `${that.parsedFileDestination}/[${nanoid(3)}]-${
           fileName.split(".csv")[0]
-        }-<${nanoid(3)}>.csv`;
+        }.csv`;
 
         that.mediator?.request({
           action: "file-manager:loadFile",
@@ -113,7 +113,7 @@ class FileManager extends BaseComponent {
   }
 
   close() {
-    logger.info("closing file");
+    status.notify(`file parsed to ${this.parsedFileName}`);
     this.fileStream?.close();
     process.exit();
   }

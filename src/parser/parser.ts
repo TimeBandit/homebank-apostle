@@ -1,8 +1,6 @@
-import createLogger from "logging";
 import { BaseComponent } from "../types";
+import { status } from "../utils/utils";
 import BaseStrategy from "./strategies/base-strategy";
-
-const logger = createLogger(__filename);
 
 class Parser extends BaseComponent {
   private _parser: BaseStrategy | null = null;
@@ -17,7 +15,7 @@ class Parser extends BaseComponent {
         data: { result },
       });
     } catch (error) {
-      logger.error("Failed to parse: ", lineOfCsv, error);
+      status.fail(`Failed to parse: ${lineOfCsv}: ${error}`);
       throw error;
     }
   }

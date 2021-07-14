@@ -10,4 +10,16 @@ const getLogger = (filePath: string) => {
   return createLogger(loggerName);
 };
 
-export { getFileName, getLogger };
+const pass = createLogger("✅️");
+const fail = createLogger("❌️");
+const warn = createLogger("🚧");
+const notify = createLogger("🔔");
+
+const status = {
+  pass: (message: string) => pass.info(message),
+  fail: (message: string) => fail.error(message),
+  warn: (message: string) => warn.warn(message),
+  notify: (message: string) => notify.info(message),
+};
+
+export { getFileName, getLogger, status };

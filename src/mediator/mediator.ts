@@ -1,6 +1,6 @@
 import FileManager from "../file-manager/file-manager";
 import Parser from "../parser/parser";
-import { getLogger } from "../utils/utils";
+import { getLogger, status } from "../utils/utils";
 import View from "../view/view";
 
 const logger = getLogger(__filename);
@@ -84,7 +84,7 @@ export class Mediator implements BaseMediator {
       action: "view:promptUser",
       handle: (payload) => {
         const { fileName, parseOnly: writeToFile } = payload;
-        logger.info("user want to write to file?", writeToFile);
+        logger.debug("users want to write to file?", writeToFile);
         this.writeToFile = writeToFile;
         try {
           this.filemanager?.loadFile(fileName, this.writeToFile);
@@ -99,7 +99,7 @@ export class Mediator implements BaseMediator {
       handle: async (payload) => {
         const { isOpen } = payload;
         if (!isOpen) {
-          logger.error("could not open file");
+          status.warn("could not open file");
           process.exit(1);
         }
 
@@ -122,7 +122,11 @@ export class Mediator implements BaseMediator {
         if (hasNextLine) {
           this.filemanager?.readLine();
         } else {
-          this.filemanager?.close();
+          if (this.writeToFile) {
+            this.filemanager?.close();
+          } else {
+            status.notify("parsing completed");
+          }
         }
       },
     });
@@ -147,7 +151,7 @@ export class Mediator implements BaseMediator {
       action: "parser:result",
       handle: async (payload) => {
         const { result } = payload;
-        logger.info(result);
+        status.pass(result);
         if (this.writeToFile) {
           await this.filemanager?.write(result);
         }
