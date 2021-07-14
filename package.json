@@ -1,6 +1,6 @@
 {
   "name": "homebank-apostle",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Converts exported transaction statements to Homebank format for import.",
   "main": "./lib/index/js",
   "bin": {
