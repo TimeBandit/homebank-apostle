@@ -10,6 +10,9 @@
 <h4 align="center">A tool to help you convert csv exports into a Homebank compatible format</h4>
 
 <p align="center">
+  <a>
+    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/timebandit/homebank-apostle">
+  </a>
   <a href="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
     <img src="https://github.com/TimeBandit/homebank-apostle/workflows/Node.js%20CI/badge.svg">
   </a>
