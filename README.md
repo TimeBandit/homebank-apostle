@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="./img/HBLogo.png" width="200">
+  <img src="./img/hbLogo.gif" width="200">
   <br>
   Homebank Apostle
   <br>
