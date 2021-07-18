@@ -1,9 +1,6 @@
 <h1 align="center">
   <br>
   <img src="./img/hbLogo.gif" width="200">
-  <br>
-  Homebank Apostle
-  <br>
 </h1>
 
 <h3 align="center">UNDER DEVELOPMENT</h3>
