@@ -35,11 +35,11 @@
 
 ## Key Features
 
-This tools was created to help me work with my online banking transaction files. The exports were in CSV format and needed parsing into a format that Homebank could import. There are two modes of operation. A `parse only` or a `parse to file` mode. Both modes will halt if there is an error in parsing a paticular line in the CSV file with an error message being displayed in the terminal.
+This tool was created to convert online banking transaction files to Homebank format. There are two modes of operation. A **parse only** or a **parse to file** mode. Both modes will halt if there is an error in parsing a paticular line during convertion.
 
 ## Installation
 
-Clone the repo and change directory into the cloned folder
+Clone the repo and `cd` directory into the cloned folder
 
 ```console
 foo@bar:~$ git clone https://github.com/TimeBandit/homebank-apostle.git
@@ -61,6 +61,8 @@ foo@bar:~$ npm run local
 
 ## Usage
 
+Open a terminal window at the location of your csv files. Run `hba` and follow the on screen prompts. If successful the converted file will be saved to **/parsed** folder.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -69,10 +71,10 @@ Please make sure to update tests as appropriate.
 
 To add support for other bank exports you must first create a strategy for it. This tell the tool how to map payment types from your bank to something Homebanks can understand.
 
-Below are the payment types that Homebank currently supports. They correspond to the selectables of the Payment dropdown list you see when you edit a transaction in Homebank. The ordering is important
+Below are the payment types that Homebank currently supports. They correspond to the selectables of the **Payment** dropdown list you see when you edit a transaction in Homebank. The ordering is important
 
 ```typescript
-enum HomebankPaymentType {
+export enum HomebankPaymentType {
   None = 0,
   CreditCard = 1,
   Cheque = 2,
@@ -87,7 +89,13 @@ enum HomebankPaymentType {
 }
 ```
 
-Create a stategy for your bank that implement the BaseStrategy interface. This maps the payment types for your bank to Homebank transaction types. It needs a `parse(...)` method that takes a like of CSV from your source file and a `mapSourceTypeToHomebankType(...)` that does the actual mapping of the payment types.
+Create a stategy for your bank that implement the BaseStrategy interface. This maps the payment types for your bank to Homebank transaction types.
+
+## Suported Banks
+
+| Bank  | Homepage                 |
+| ----- | ------------------------ |
+| Smile | https://www.smile.co.uk/ |
 
 ## License
 
