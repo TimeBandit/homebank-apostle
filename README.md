@@ -1,9 +1,8 @@
 <h1 align="center">
   <br>
-  <img src="./img/hbLogo.gif" width="200">
+  ✨️Homebank Apostle
 </h1>
 
-<h3 align="center">UNDER DEVELOPMENT</h3>
 <h4 align="center">A tool to help you convert csv exports into a Homebank compatible format</h4>
 
 <p align="center">
