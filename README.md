@@ -73,18 +73,18 @@ To add support for other bank exports you must first create a strategy for it. T
 Below are the payment types that Homebank currently supports. They correspond to the selectables of the **Payment** dropdown list you see when you edit a transaction in Homebank. The ordering is important
 
 ```typescript
-export enum HomebankPaymentType {
-  None = 0,
-  CreditCard = 1,
-  Cheque = 2,
-  Cash = 3,
-  Transfer = 4,
-  DebitCard = 5,
-  StandingOrder = 6,
-  ElectronicPayment = 7,
-  Deposit = 8,
-  FiFee = 9,
-  DirectDebit = 10,
+enum HomebankPaymentType {
+  None = 1,
+  CreditCard = 2,
+  Cheque = 3,
+  Cash = 4,
+  BankTransfer = 5,
+  DebitCard = 6,
+  StandingOrder = 7,
+  ElectronicPayment = 8,
+  Deposit = 9,
+  FiFee = 10,
+  DirectDebit = 11,
 }
 ```
 

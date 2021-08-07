@@ -1,6 +1,10 @@
 import papa from "papaparse";
 import BaseStrategy from "./base-strategy";
-import { HomebankPaymentType, HomebankTransaction } from "./types";
+import {
+  HomebankPaymentType,
+  HomebankTransaction,
+  SmilePaymentType,
+} from "./types";
 
 const SOURCE_HEADERS = "Date,Description,Type,Money In,Money Out,Balance";
 const DESTINATION_HEADERS = "date;payment;info;payee;memo;amount;category;tags";
@@ -11,17 +15,6 @@ interface SmileTransaction {
   ["Money In"]: string;
   ["Money Out"]: string;
   Balance: string;
-}
-
-enum SmilePaymentType {
-  ATM = "ATM",
-  Transfer = "TRANSFER",
-  Purchase = "PURCHASE",
-  StandingOrder = "BP/SO",
-  Credit = "CREDIT",
-  DirectDebit = "DD",
-  Other = "OTHER",
-  Unknown = "UNKNOWN",
 }
 
 class SmileBankStrategy implements BaseStrategy {
@@ -36,7 +29,7 @@ class SmileBankStrategy implements BaseStrategy {
         homeBankTransactionType = HomebankPaymentType.Cash;
         break;
       case SmilePaymentType.Credit:
-        homeBankTransactionType = HomebankPaymentType.ElectronicPayment;
+        homeBankTransactionType = HomebankPaymentType.BankTransfer;
         break;
       case SmilePaymentType.DirectDebit:
         homeBankTransactionType = HomebankPaymentType.DirectDebit;
@@ -48,7 +41,7 @@ class SmileBankStrategy implements BaseStrategy {
         homeBankTransactionType = HomebankPaymentType.StandingOrder;
         break;
       case SmilePaymentType.Transfer:
-        homeBankTransactionType = HomebankPaymentType.Transfer;
+        homeBankTransactionType = HomebankPaymentType.ElectronicPayment;
         break;
       case SmilePaymentType.Other:
       case SmilePaymentType.Unknown:
