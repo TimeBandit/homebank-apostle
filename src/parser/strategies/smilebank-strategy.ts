@@ -43,6 +43,9 @@ class SmileBankStrategy implements BaseStrategy {
       case SmilePaymentType.Transfer:
         homeBankTransactionType = HomebankPaymentType.ElectronicPayment;
         break;
+      case SmilePaymentType.Interest:
+        homeBankTransactionType = HomebankPaymentType.FiFee;
+        break;
       case SmilePaymentType.Other:
       case SmilePaymentType.Unknown:
         homeBankTransactionType = HomebankPaymentType.None;

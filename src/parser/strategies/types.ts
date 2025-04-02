@@ -32,5 +32,6 @@ export enum SmilePaymentType {
   Credit = "CREDIT",
   DirectDebit = "DD",
   Other = "OTHER",
+  Interest = "INTEREST",
   Unknown = "UNKNOWN",
 }
